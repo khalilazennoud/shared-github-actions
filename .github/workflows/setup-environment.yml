@@ -9,10 +9,10 @@ on:
         default: '16'
         type: string
       install_dependencies:
-        description: 'Whether to install dependencies'
+        description: 'Whether to install dependencies (true/false as string)'
         required: false
         default: 'true'
-        type: boolean
+        type: string
 
 jobs:
   setup:
@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ inputs.node_version }}
 
       - name: Install Dependencies
-        if: ${{ inputs.install_dependencies }}
+        if: ${{ inputs.install_dependencies == 'true' }}
         run: |
           echo "Installing dependencies..."
           npm install
